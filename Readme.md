@@ -9,6 +9,12 @@ This is a monolog log processor that prepares data intended to go to RabbitMQ to
 
 **Step 1**
 
+Install this package using the direct repository strategy.
+
+> TODO: explain further how to do this.
+
+**Step 2**
+
 Install a RabbitMQ driver into your laravel instance by adding this to your `config/logging`:
 
 ```php
@@ -28,7 +34,7 @@ use App\Logging\RabbitmqLogger;
 //...
 ```
 
-**Step 2**
+**Step 3**
 
 Implement your **Custom Logger** where you use this **Processor**:
 
