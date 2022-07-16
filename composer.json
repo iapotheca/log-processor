@@ -1,0 +1,29 @@
+{
+    "name": "iapotheca/cr-log-processor",
+    "description": "Log Processor for Courier Network",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Iapotheca\\CrLogProcessor\\": "src/",
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Savio Resende",
+            "email": "savio@savioresende.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^2.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5",
+        "mockery/mockery": "^1.5"
+    },
+    "scripts": {
+        "test": [
+            "./vendor/bin/phpunit --testsuite Unit"
+        ]
+    }
+}
