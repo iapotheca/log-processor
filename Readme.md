@@ -1,6 +1,8 @@
 
 # Courier Network Log Processor
 
+[![Tests](https://github.com/iapotheca/cr-log-processor/actions/workflows/php.yml/badge.svg)](https://github.com/iapotheca/cr-log-processor/actions/workflows/php.yml)
+
 This is a monolog log processor that prepares data intended to go to RabbitMQ to be observed by Logstash ingestion to persist metadata existent in the log message.
 
 ## Installation
