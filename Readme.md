@@ -1,7 +1,7 @@
 
 # Courier Network Log Processor
 
-[![Tests](https://github.com/iapotheca/cr-log-processor/actions/workflows/php.yml/badge.svg)](https://github.com/iapotheca/cr-log-processor/actions/workflows/php.yml)
+[![Tests](https://github.com/iapotheca/log-processor/actions/workflows/php.yml/badge.svg)](https://github.com/iapotheca/log-processor/actions/workflows/php.yml)
 
 This is a monolog log processor that prepares data intended to go to RabbitMQ to be observed by Logstash ingestion to persist metadata existent in the log message.
 
@@ -45,7 +45,7 @@ File: `app/Logging/RabbitmqLogger.php`
 
 namespace App\Logging;
 
-use Iapotheca\CrLogProcessor\EconorouteProcessor;
+use Iapotheca\LogProcessor\Processor;
 use Monolog\Logger;
 use PhpAmqpLib\Connection\AMQPSocketConnection;
 use PhpAmqpLib\Channel\AMQPChannel;
@@ -64,7 +64,9 @@ class RabbitmqLogger
         $channel = new AMQPChannel($connection);
         $logger = new Logger($config['log-name']);
         $handler = new AmqpHandler($channel, $config['exchange-name']);
-        $handler->pushProcessor(new EconorouteProcessor(config('app.name')));
+        $handler->pushProcessor(new Processor(config('app.name'), [
+            'KEY_ONE', 'KEY_TWO'
+        ]));
         $logger->pushHandler($handler);
         return $logger;
     }
