@@ -1,10 +1,10 @@
 {
-    "name": "iapotheca/cr-log-processor",
+    "name": "iapotheca/log-processor",
     "description": "Log Processor for Courier Network",
     "license": "proprietary",
     "autoload": {
         "psr-4": {
-            "Iapotheca\\CrLogProcessor\\": "src/",
+            "Iapotheca\\LogProcessor\\": "src/",
             "Tests\\": "tests/"
         }
     },
