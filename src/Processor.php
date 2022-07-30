@@ -31,12 +31,12 @@ class Processor implements ProcessorInterface
     {
         $record['app'] = $this->appName;
 
-        if (null !== $this->preProcessingCallback) {
-            $record = ($this->preProcessingCallback)($record);
-        }
-        
         foreach ($this->keys as $key) {
             $record[strtolower($key)] = $this->getAttribute($key, $record['message']);
+        }
+
+        if (null !== $this->preProcessingCallback) {
+            $record = ($this->preProcessingCallback)($record);
         }
 
         return $record;
