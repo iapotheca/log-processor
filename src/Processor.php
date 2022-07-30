@@ -9,10 +9,22 @@ class Processor implements ProcessorInterface
     protected string $appName;
     protected array $keys;
 
-    public function __construct(?string $appName, array $keys = [])
-    {
+    /** @var callable|null */
+    protected $preProcessingCallback;
+
+    /**
+     * @param string|null $appName
+     * @param array $keys
+     * @param ?callable $preProcessingCallback
+     */
+    public function __construct(
+        ?string $appName,
+        array $keys = [],
+        $preProcessingCallback = null
+    ) {
         $this->appName = $appName;
         $this->keys = $keys;
+        $this->preProcessingCallback = $preProcessingCallback;
     }
 
     public function __invoke(array $record): array
@@ -21,6 +33,10 @@ class Processor implements ProcessorInterface
 
         foreach ($this->keys as $key) {
             $record[strtolower($key)] = $this->getAttribute($key, $record['message']);
+        }
+
+        if (null !== $this->preProcessingCallback) {
+            $record = ($this->preProcessingCallback)($record);
         }
 
         return $record;
