@@ -1,17 +1,25 @@
 
-# Courier Network Log Processor
+# Log Processor
 
 [![Tests](https://github.com/iapotheca/log-processor/actions/workflows/php.yml/badge.svg)](https://github.com/iapotheca/log-processor/actions/workflows/php.yml)
 
 This is a monolog log processor that prepares data intended to go to RabbitMQ to be observed by Logstash ingestion to persist metadata existent in the log message.
 
+This package parses data from the log message into RabbitMQ plain fields. E.g: the following message will be converted to the data structure after:
+
+> Message: `[KEY value] My message here`
+> 
+> Data: `{key: "value", message: "[KEY value] My message here"}`
+
 ## Installation
 
 **Step 1**
 
-Install this package using the direct repository strategy.
+Install this package:
 
-> TODO: explain further how to do this.
+```shell
+composer require 
+```
 
 **Step 2**
 
@@ -65,6 +73,7 @@ class RabbitmqLogger
         $logger = new Logger($config['log-name']);
         $handler = new AmqpHandler($channel, $config['exchange-name']);
         $handler->pushProcessor(new Processor(config('app.name'), [
+            // these are the observed keys within the log message
             'KEY_ONE', 'KEY_TWO'
         ]));
         $logger->pushHandler($handler);
