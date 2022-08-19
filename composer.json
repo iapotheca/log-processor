@@ -1,6 +1,5 @@
 {
     "name": "iapotheca/log-processor",
-    "version": "0.0.1",
     "description": "Log Processor for Courier Network",
     "license": "proprietary",
     "autoload": {
