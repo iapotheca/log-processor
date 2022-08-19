@@ -18,7 +18,7 @@ This package parses data from the log message into RabbitMQ plain fields. E.g: t
 Install this package:
 
 ```shell
-composer require 
+composer require iapotheca/log-processor
 ```
 
 **Step 2**
