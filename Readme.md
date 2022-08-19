@@ -15,10 +15,10 @@ This package parses data from the log message into RabbitMQ plain fields. E.g: t
 
 **Step 1**
 
-Install this package:
+Install dependencies and this package:
 
 ```shell
-composer require iapotheca/log-processor
+composer require php-amqplib/php-amqplib iapotheca/log-processor
 ```
 
 **Step 2**
