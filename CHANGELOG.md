@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file.
 Updates should follow the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
+## [0.0.8] - 2022-09-12
+
+### Added
+
+- Added clean message to the ELK output.
+
 ## [0.0.7] - 2022-09-12
 
 ### Added
