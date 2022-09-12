@@ -81,3 +81,20 @@ class RabbitmqLogger
     }
 }
 ```
+
+## Extras
+
+### Special Characters in the fields
+
+The `Processor` class accepts 4 parameters: `$appName`, `$keys`, `$preProcessingCallback` and `$extraSpecialCharacters`. The 4th parameter is for any special character that your value might need to accept.
+
+The following example will accept `@` characters:
+
+```php
+new Processor(
+    appName: 'my-app',
+    keys: ['SOME_FIELD'],
+    preProcessingCallback: null,
+    extraSpecialCharacters: ['@']
+)
+```

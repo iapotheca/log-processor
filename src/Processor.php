@@ -8,6 +8,7 @@ class Processor implements ProcessorInterface
 {
     protected string $appName;
     protected array $keys;
+    protected array $extraSpecialCharacters;
 
     /** @var callable|null */
     protected $preProcessingCallback;
@@ -20,11 +21,13 @@ class Processor implements ProcessorInterface
     public function __construct(
         ?string $appName,
         array $keys = [],
-        $preProcessingCallback = null
+        $preProcessingCallback = null,
+        array $extraSpecialCharacters = []
     ) {
         $this->appName = $appName;
         $this->keys = $keys;
         $this->preProcessingCallback = $preProcessingCallback;
+        $this->extraSpecialCharacters = $extraSpecialCharacters;
     }
 
     public function __invoke(array $record): array
@@ -50,8 +53,13 @@ class Processor implements ProcessorInterface
      */
     protected function getAttribute(string $key, string $message)
     {
+        $specialCharacters = ['-', '.'];
+        if (!empty($this->extraSpecialCharacters)) {
+            $specialCharacters = array_merge($specialCharacters, $this->extraSpecialCharacters);
+        }
+
         $attributeMatches = [];
-        preg_match('/' . $key . '.[0-9a-zA-Z\-\.]+/', $message, $attributeMatches, PREG_OFFSET_CAPTURE);
+        preg_match('/' . $key . '.[0-9a-zA-Z' . implode('\\', $specialCharacters) . ']+/', $message, $attributeMatches, PREG_OFFSET_CAPTURE);
         $attributeMatches = $this->getFirstMatch($attributeMatches);
 
         if (null === $attributeMatches) {

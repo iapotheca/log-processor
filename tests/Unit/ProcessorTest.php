@@ -7,6 +7,9 @@ use Tests\TestCase;
 
 class ProcessorTest extends TestCase
 {
+    /**
+     * @covers \Iapotheca\LogProcessor\Processor
+     */
     public function test_can_ingest_data_from_logs()
     {
         $estimateId = 1234;
@@ -46,5 +49,22 @@ class ProcessorTest extends TestCase
         $this->assertEquals($webhook, $result['webhook']);
         $this->assertEquals($teamId, $result['team']);
         $this->assertEquals($notification, $result['notification']);
+    }
+
+    /**
+     * @covers \Iapotheca\LogProcessor\Processor
+     */
+    public function test_spacial_character()
+    {
+        $value = 'my-new@value';
+
+        $record = [];
+        $record['message'] = '[SOME_FIELD ' . $value . '] test savio';
+
+        $result = (new Processor('my-app', [
+            'SOME_FIELD',
+        ], null, ['@']))($record);
+
+        $this->assertEquals($value, $result['some_field']);
     }
 }
