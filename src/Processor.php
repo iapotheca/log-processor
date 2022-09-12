@@ -42,6 +42,8 @@ class Processor implements ProcessorInterface
             $record = ($this->preProcessingCallback)($record);
         }
 
+        $record['clean_message'] = trim(substr(strrchr($record['message'], ']'), 1));
+
         return $record;
     }
 

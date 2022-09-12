@@ -67,4 +67,21 @@ class ProcessorTest extends TestCase
 
         $this->assertEquals($value, $result['some_field']);
     }
+
+    /**
+     * @covers \Iapotheca\LogProcessor\Processor
+     */
+    public function test_clean_message()
+    {
+        $value = 'my-new@value';
+
+        $record = [];
+        $record['message'] = '[SOME_FIELD ' . $value . '] test savio';
+
+        $result = (new Processor('my-app', [
+            'SOME_FIELD',
+        ], null, ['@']))($record);
+
+        $this->assertEquals('test savio', $result['clean_message']);
+    }
 }
